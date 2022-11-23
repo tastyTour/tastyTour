@@ -2,38 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletSpawner : MonoBehaviour
+public class BulletSpawner : MonoBehaviour//Tour
 {
-    public GameObject bulletprefab;//»ı¼ºÇÒ Åº¾ËÀÇ ¿øº» ÇÁ¸®ÆÕ
-    public float spawnRateMin = 0.5f;//ÃÖ¼Ò »ı¼º ÁÖ±â
-    public float spawnRateMax = 3f;//ÃÖ´ë »ı¼º ÁÖ±â
+    public GameObject bulletprefab;//ìƒì„±í•  íƒ„ì•Œì˜ ì›ë³¸ í”„ë¦¬íŒ¹
+    public float spawnRateMin = 0.5f;//ìµœì†Œ ìƒì„± ì£¼ê¸°
+    public float spawnRateMax = 3f;//ìµœëŒ€ ìƒì„± ì£¼ê¸°
 
-    private Transform target;//¹ß»çÇÒ ´ë»ó
-    private float spawnRate;//»ı¼º ÁÖ±â
-    private float timeAfterSpawn;//ÃÖ±Ù »ı¼º ½ÃÁ¡¿¡¼­ Áö³­ ½Ã°£
+    private Transform target;//ë°œì‚¬í•  ëŒ€ìƒ
+    private float spawnRate;//ìƒì„± ì£¼ê¸°
+    private float timeAfterSpawn;//ìµœê·¼ ìƒì„± ì‹œì ì—ì„œ ì§€ë‚œ ì‹œê°„
 
     // Start is called before the first frame update
     void Start()
     {
-        timeAfterSpawn = 0f;//ÃÖ±Ù »ı¼º ÀÌÈÄÀÇ ´©Àû ½Ã°£À» 0À¸·Î ÃÊ±âÈ­
-        spawnRate = Random.Range(spawnRateMin, spawnRateMax);//Åº¾Ë »ı¼º °£°İÀ» spawnRateMin°ú spawnRateMax»çÀÌ¿¡¼­ ·£´ı ÁöÁ¤
-        target = FindObjectOfType<PlayerController>().transform;//PlayerController ÄÄÆ÷³ÍÆ®¸¦ °¡Áø °ÔÀÓ ¿ÀºêÁ§Æ®¸¦ Ã£¾Æ Á¶ÁØ ´ë»óÀ¸·Î ¼³Á¤
+        timeAfterSpawn = 0f;//ìµœê·¼ ìƒì„± ì´í›„ì˜ ëˆ„ì  ì‹œê°„ì„ 0ìœ¼ë¡œ ì´ˆê¸°í™”
+        spawnRate = Random.Range(spawnRateMin, spawnRateMax);//íƒ„ì•Œ ìƒì„± ê°„ê²©ì„ spawnRateMinê³¼ spawnRateMaxì‚¬ì´ì—ì„œ ëœë¤ ì§€ì •
+        target = FindObjectOfType<PlayerController>().transform;//PlayerController ì»´í¬ë„ŒíŠ¸ë¥¼ ê°€ì§„ ê²Œì„ ì˜¤ë¸Œì íŠ¸ë¥¼ ì°¾ì•„ ì¡°ì¤€ ëŒ€ìƒìœ¼ë¡œ ì„¤ì •
     }
 
     // Update is called once per frame
     void Update()
     {
-        timeAfterSpawn += Time.deltaTime;//timeAfterSpawn °»½Å
+        timeAfterSpawn += Time.deltaTime;//timeAfterSpawn ê°±ì‹ 
 
-        if(timeAfterSpawn >= spawnRate)//ÃÖ±Ù »ı¼º ½ÃÁ¡¿¡¼­ºÎÅÍ ´©ÀûµÈ ½Ã°£ÀÌ »ı¼º ÁÖ±âº¸´Ù Å©°Å³ª °°´Ù¸é
+        if(timeAfterSpawn >= spawnRate)//ìµœê·¼ ìƒì„± ì‹œì ì—ì„œë¶€í„° ëˆ„ì ëœ ì‹œê°„ì´ ìƒì„± ì£¼ê¸°ë³´ë‹¤ í¬ê±°ë‚˜ ê°™ë‹¤ë©´
         {
-            timeAfterSpawn = 0f;//´©ÀûµÈ ½Ã°£À» ¸®¼Â
-            //ÇÁ¸®ÆÕÀÇ º¹Á¦º»À»
-            //transform.position(À§Ä¡)¿Í transform.rotate (È¸Àü)À» º¹Á¦ÇÏ¿© »ı¼º
+            timeAfterSpawn = 0f;//ëˆ„ì ëœ ì‹œê°„ì„ ë¦¬ì…‹
+            //í”„ë¦¬íŒ¹ì˜ ë³µì œë³¸ì„
+            //transform.position(ìœ„ì¹˜)ì™€ transform.rotate (íšŒì „)ì„ ë³µì œí•˜ì—¬ ìƒì„±
             GameObject bullet = Instantiate(bulletprefab, transform.position, transform.rotation);
 
-            bullet.transform.LookAt(target);//»ı¼ºµÈ ºÒ¸´ °ÔÀÓ ¿ÀºêÁ§Æ®ÀÇ Á¤¸é ¹æÇâÀÌ Å¸°ÙÀ» ÇâÇÏµµ·Ï È¸Àü
-            spawnRate = Random.Range(spawnRateMin, spawnRateMax);//´ÙÀ½¹ø »ı¼º °£°İÀ» spawnratemin, spawnratemax »çÀÌ¿¡¼­ ·£´ı ÁöÁ¤
+            bullet.transform.LookAt(target);//ìƒì„±ëœ ë¶ˆë¦¿ ê²Œì„ ì˜¤ë¸Œì íŠ¸ì˜ ì •ë©´ ë°©í–¥ì´ íƒ€ê²Ÿì„ í–¥í•˜ë„ë¡ íšŒì „
+            spawnRate = Random.Range(spawnRateMin, spawnRateMax);//ë‹¤ìŒë²ˆ ìƒì„± ê°„ê²©ì„ spawnratemin, spawnratemax ì‚¬ì´ì—ì„œ ëœë¤ ì§€ì •
         }
     }
 }
